@@ -19,7 +19,7 @@ class Laser {
 	}
 
 	method moverAbajo() {
-		game.onTick(75, self.identity().toString(), { self.desplazarAbajo()})
+		game.onTick(200, self.identity().toString(), { self.desplazarAbajo()})
 		game.onCollideDo(self, { algo =>
 			algo.impactoLaser()
 			self.impactoLaser()
@@ -38,9 +38,10 @@ class Laser {
 	}
 
 	method desplazarAbajo() {
-		position = position.down(1)
 		if (position.y() < 0) {
 			self.impactoLaser()
+		} else {
+			position = position.down(2)
 		}
 	}
 
