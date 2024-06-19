@@ -1,6 +1,5 @@
 import example.*
 
 program main {
-	juego.configurar()
-	juego.iniciar()
+	juego.pantallaInicial()
 }

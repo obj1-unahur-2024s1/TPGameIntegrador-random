@@ -11,9 +11,24 @@ object juego {
 		game.height(20)
 		game.width(32)
 		game.title("Space Ship")
-		game.boardGround("image/spaceBG.jpg")
 		keyboard.space().onPressDo{ mainShip.disparar()}
-		keyboard.enter().onPressDo{ console.println(game.allVisuals())}
+	}
+
+	method pantallaInicial() {
+		game.cellSize(32)
+		game.height(20)
+		game.width(32)
+		game.title("Space Ship")
+		game.boardGround("image/spaceBG.jpg")
+		keyboard.enter().onPressDo{ self.juegoPrincipal()}
+		game.addVisual(tableroInstrucciones)
+		game.start()
+	}
+
+	method juegoPrincipal() {
+		game.clear()
+		self.configurar()
+		self.iniciar()
 	}
 
 	method iniciar() {
@@ -22,7 +37,6 @@ object juego {
 		self.agregarSoldados(13)
 		game.addVisualCharacter(mainShip)
 		game.addVisual(vidas)
-		game.start()
 	}
 
 	method gameOver() {
@@ -101,6 +115,14 @@ object tableroGameOver {
 	method position() = game.at(9, 10)
 
 	method image() = "image/gameOver.png"
+
+}
+
+object tableroInstrucciones {
+
+	method position() = game.at(0, 0)
+
+	method image() = "image/instrucciones.jpg"
 
 }
 
