@@ -11,16 +11,14 @@ object juego {
 		game.height(20)
 		game.width(32)
 		game.title("Space Ship")
+		game.boardGround("image/spaceBG.jpg")
+		keyboard.enter().onPressDo{ self.juegoPrincipal()}
 		keyboard.space().onPressDo{ mainShip.disparar()}
 	}
 
 	method pantallaInicial() {
-		game.cellSize(32)
-		game.height(20)
-		game.width(32)
+		self.configurar()
 		game.title("Space Ship")
-		game.boardGround("image/spaceBG.jpg")
-		keyboard.enter().onPressDo{ self.juegoPrincipal()}
 		game.addVisual(tableroInstrucciones)
 		game.start()
 	}
