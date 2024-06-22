@@ -44,10 +44,14 @@ object juego {
 		sonidoGameOver.play()
 	}
 
+	method youWin() {
+		game.clear()
+		game.addVisual(tableroYouWin)
+	}
+
 	method jefeFinal() {
 		const motherShip = new MotherShip(position = game.at(6, 16))
 		game.clear()
-		game.boardGround("image/spaceBG.jpg")
 		game.addVisual(motherShip)
 		game.addVisualCharacter(mainShip)
 		game.onTick(1000, "moverAlternado", { motherShip.moverAlternado()})
@@ -108,11 +112,20 @@ object puntos {
 
 }
 
+// estos tableros deberiamos pasarlos a una clase
 object tableroGameOver {
 
 	method position() = game.at(9, 10)
 
 	method image() = "image/gameOver.png"
+
+}
+
+object tableroYouWin {
+
+	method position() = game.at(5, 5)
+
+	method image() = "image/tableroWin.png"
 
 }
 
