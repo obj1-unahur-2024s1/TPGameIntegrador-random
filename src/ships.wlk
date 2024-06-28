@@ -172,7 +172,7 @@ class MotherShip inherits EnemyShip {
 
 object vidasMotherShip {
 
-	const position = game.center()
+	const position = game.at(25, 18)
 	var image = "image/barraCompleta.jpeg"
 	var vidasMother = 4
 
