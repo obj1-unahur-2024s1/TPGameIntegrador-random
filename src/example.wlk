@@ -42,14 +42,12 @@ object juego {
 		game.addVisual(tableroGameOver)
 		musicaDeFondo.sacarMusica()
 		sonidoGameOver.play()
-		
 		keyboard.enter().onPressDo{ self.reiniciarJuego()}
 	}
 
 	method youWin() {
 		game.clear()
 		game.addVisual(tableroYouWin)
-		
 		keyboard.enter().onPressDo{ self.reiniciarJuego()}
 	}
 
@@ -58,7 +56,7 @@ object juego {
 		game.clear()
 		game.addVisual(motherShip)
 		game.addVisualCharacter(mainShip)
-		game.addVisual(vidasMotherShip) //agrega las vidas
+		game.addVisual(vidasMotherShip) // agrega las vidas
 		vidas.reiniciarVidas()
 		game.addVisual(vidas)
 		game.onTick(1000, "moverAlternado", { motherShip.moverAlternado()})
@@ -85,16 +83,15 @@ object juego {
 			game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
 		}
 	}
-	method reiniciarJuego() {
-	    game.clear()
-	    self.configurar()
-	    mainShip.position(game.at(game.width() / 2, 0))  // Reposicionar la nave
-	    mainShip.image("image/Main Ship - Base - Full health.png")  //Restable la imagen
-	    vidas.reiniciarVidas()  // Reiniciar las vidas
-	    puntos.reiniciarPuntos()  // Reiniciar los puntos
-	    self.juegoPrincipal()  // Iniciar el juego principal
-}
 
+	method reiniciarJuego() {
+		game.clear()
+		vidas.reiniciarVidas() // Reiniciar las vidas
+		puntos.reiniciarPuntos() // Reiniciar los puntos
+		mainShip.reiniciar()
+		self.configurar()
+		self.juegoPrincipal() // Iniciar el juego principal
+	}
 
 }
 
@@ -115,11 +112,11 @@ object vidas {
 		image = "image/1vidas.png"
 		if (vidas == 0) juego.gameOver()
 	}
-	
+
 	method reiniciarVidas() {
-        vidas = 2
-        image = "image/2vidas.png"
-    }
+		vidas = 2
+		image = "image/2vidas.png"
+	}
 
 }
 
@@ -131,18 +128,23 @@ object puntos {
 		puntos = puntos + 1
 		if (puntos == 12) juego.jefeFinal()
 	}
+
 	method reiniciarPuntos() {
-        puntos = 0
-    }
+		puntos = 0
+	}
+
 }
 
 // estos tableros deberiamos pasarlos a una clase
-
 class Tablero {
+
 	method position()
+
 	method image()
+
 }
-object tableroGameOver inherits Tablero{
+
+object tableroGameOver inherits Tablero {
 
 	override method position() = game.at(9, 10)
 
@@ -150,7 +152,7 @@ object tableroGameOver inherits Tablero{
 
 }
 
-object tableroYouWin inherits Tablero{
+object tableroYouWin inherits Tablero {
 
 	override method position() = game.at(5, 5)
 
@@ -158,7 +160,7 @@ object tableroYouWin inherits Tablero{
 
 }
 
-object tableroInstrucciones inherits Tablero{
+object tableroInstrucciones inherits Tablero {
 
 	override method position() = game.at(0, 0)
 

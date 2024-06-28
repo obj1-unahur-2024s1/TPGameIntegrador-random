@@ -60,6 +60,11 @@ class MainShip inherits Nave {
 		self.image("image/explosion-soldado.png")
 	}
 
+	method reiniciar() {
+		self.image("image/Main Ship - Base - Full health.png")
+		impactado = !impactado
+	}
+
 }
 
 class EnemyShip inherits Nave {
@@ -149,43 +154,46 @@ class MotherShip inherits EnemyShip {
 	}
 
 	override method impactoLaser() {
-        if (!impactado) {
-            vidasMotherShip.perderVida()
-            if (vidasMotherShip.vidasMother() == 0) {
-                self.explotar()
-                juego.youWin()
-            }
-        }
-    }
+		if (!impactado) {
+			vidasMotherShip.perderVida()
+			if (vidasMotherShip.vidasMother() == 0) {
+				self.explotar()
+				juego.youWin()
+			}
+		}
+	}
 
-    override method explotar() {
-        self.image("image/explosion-soldado.png")
-        game.removeVisual(self)
-    }
+	override method explotar() {
+		self.image("image/explosion-soldado.png")
+		game.removeVisual(self)
+	}
 
 }
 
 object vidasMotherShip {
-    const position = game.center() 
-    var image = "image/barraCompleta.jpeg"  
-    var vidasMother = 4  
 
-    method image() = image
+	const position = game.center()
+	var image = "image/barraCompleta.jpeg"
+	var vidasMother = 4
 
-    method vidasMother() = vidasMother
+	method image() = image
 
-    method position() = position
+	method vidasMother() = vidasMother
 
-    method perderVida() {
-        vidasMother = vidasMother - 1
-        if (vidasMother == 3) {
-            image = "image/barra3-4.jpeg"
-        } else if (vidasMother == 2) {
-            image = "image/barra1-4.jpeg"
-        } else if (vidasMother == 1) {
-            image = "image/barraCasiVacia.jpeg"
-        } else if (vidasMother == 0) {
-            juego.youWin()
-        }
-    }
+	method position() = position
+
+	method perderVida() {
+		vidasMother = vidasMother - 1
+		if (vidasMother == 3) {
+			image = "image/barra3-4.jpeg"
+		} else if (vidasMother == 2) {
+			image = "image/barra1-4.jpeg"
+		} else if (vidasMother == 1) {
+			image = "image/barraCasiVacia.jpeg"
+		} else if (vidasMother == 0) {
+			juego.youWin()
+		}
+	}
+
 }
+
