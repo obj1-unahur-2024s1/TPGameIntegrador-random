@@ -6,8 +6,7 @@ import vidas.*
 
 object juego {
 
-	//const mainShip = new MainShip()
-
+	// const mainShip = new MainShip()
 	method configurar() {
 		game.cellSize(32)
 		game.height(20)
@@ -17,11 +16,17 @@ object juego {
 	}
 
 	method pantallaInicial() {
+		game.clear()
 		self.configurar()
 		keyboard.enter().onPressDo{ self.juegoPrincipal()}
-		//Ya está en el self.configurar()	game.title("Space Ship")
-		game.addVisual(tableroInstrucciones)
+		keyboard.space().onPressDo{ self.pantallaInstrucciones()}
+		game.addVisual(tableroInicio)
 		game.start()
+	}
+
+	method pantallaInstrucciones() {
+		keyboard.x().onPressDo{ game.removeVisual(tableroInstrucciones)}
+		game.addVisual(tableroInstrucciones)
 	}
 
 	method juegoPrincipal() {
@@ -97,8 +102,6 @@ object juego {
 
 }
 
-
-
 object puntos {
 
 	var property puntos = 0
@@ -113,5 +116,4 @@ object puntos {
 	}
 
 }
-
 
