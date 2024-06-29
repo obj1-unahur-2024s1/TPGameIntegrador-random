@@ -20,6 +20,7 @@ object juego {
 		keyboard.enter().onPressDo{ self.juegoPrincipal()}
 		keyboard.space().onPressDo{ self.pantallaInstrucciones()}
 		game.addVisual(tableroInicio)
+		musicaDeFondo.iniciar()
 		game.start()
 	}
 
@@ -35,7 +36,6 @@ object juego {
 	}
 
 	method iniciar() {
-		musicaDeFondo.iniciar()
 		self.agregarCapitanes(15)
 		self.agregarSoldados(13)
 		game.addVisualCharacter(mainShip)
@@ -52,6 +52,8 @@ object juego {
 
 	method youWin() {
 		game.clear()
+		musicaDeFondo.sacarMusica()
+		sonidoWin.play()
 		game.addVisual(tableroYouWin)
 		keyboard.enter().onPressDo{ self.reiniciarJuego()}
 	}
