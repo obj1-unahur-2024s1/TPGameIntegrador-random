@@ -4,6 +4,11 @@ import ships.*
 import weapons.*
 import vidas.*
 
+object sonidoWin{
+	method play(){
+	game.sound("assets/winning.mp3").play()}
+}
+
 object sonidoGameOver{
 	method play(){
 	game.sound("assets/game-over.mp3").play()}
