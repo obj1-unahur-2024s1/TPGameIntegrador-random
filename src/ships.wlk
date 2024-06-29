@@ -170,7 +170,7 @@ class MotherShip inherits EnemyShip {
 		if (!impactado) {
 			const x = 0.randomUpTo(game.width()).truncate(0)
 			const unLaser = new Laser(position = game.at(x, position.y() - 1.5))
-			sonidoDisparos.play()
+			//sonidoDisparos.play() quito sonido laser
 			game.addVisual(unLaser)
 			unLaser.moverAbajo()
 		}
