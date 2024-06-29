@@ -68,23 +68,43 @@ class MainShip inherits Nave {
 }
 
 class EnemyShip inherits Nave {
-
+	var cuenta = 0
+	const limiteCuenta = 11
 	var moverADerecha = true
 	var property position
 
 	method position() = position
 
 	method moverDerecha() {
-		position = game.at(position.x() + 1, position.y())
+		self.position(self.position().right(1))
+		//position = game.at(position.x() + 1, position.y())
 	}
 
 	method moverIzquierda() {
-		position = game.at(position.x() - 1, position.y())
+		self.position(self.position().left(1))
+		//position = game.at(position.x() - 1, position.y())
 	}
 
 	method moverAlternado() {
 		if (moverADerecha) self.moverDerecha() else self.moverIzquierda()
 		moverADerecha = !moverADerecha
+	}
+	
+	method moverNormal() {
+		if (cuenta!=limiteCuenta and moverADerecha) {
+			self.moverDerecha()
+			cuenta+=1
+		} else if(cuenta!=limiteCuenta and !moverADerecha){
+			self.moverIzquierda()
+			cuenta+=1
+		}else{
+			cuenta=0
+			moverADerecha = !moverADerecha
+		}
+		//if ((cuenta!=4) and moverADerecha) {self.moverDerecha() cuenta+=1}
+		//else if((cuenta!=4) and !moverADerecha){self.moverIzquierda()cuenta+=1} else
+		//cuenta=0
+		//moverADerecha = !moverADerecha
 	}
 
 	override method impactoLaser() {

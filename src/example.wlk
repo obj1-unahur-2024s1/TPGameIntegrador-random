@@ -17,7 +17,7 @@ object juego {
 	method pantallaInicial() {
 		self.configurar()
 		keyboard.enter().onPressDo{ self.juegoPrincipal()}
-		game.title("Space Ship")
+		//Ya está en el self.configurar()	game.title("Space Ship")
 		game.addVisual(tableroInstrucciones)
 		game.start()
 	}
@@ -65,20 +65,20 @@ object juego {
 	}
 
 	method agregarSoldados(ejeY) {
-		const filaSoldados = [ new Soldado(position=game.at(6,ejeY)), new Soldado(position=game.at(9,ejeY)), new Soldado(position=game.at(12,ejeY)), new Soldado(position=game.at(15,ejeY)), new Soldado(position=game.at(18,ejeY)), new Soldado(position=game.at(21,ejeY)) ]
+		const filaSoldados = [ new Soldado(position=game.at(3,ejeY)), new Soldado(position=game.at(6,ejeY)), new Soldado(position=game.at(9,ejeY)), new Soldado(position=game.at(12,ejeY)), new Soldado(position=game.at(15,ejeY)), new Soldado(position=game.at(18,ejeY)) ]
 		filaSoldados.forEach{ soldier =>
 			game.addVisual(soldier)
-			game.onTick(1000, "moverAlternado", { soldier.moverAlternado()})
+			game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
 			const randomInterval = 3000.randomUpTo(6000)
 			game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
 		}
 	}
 
 	method agregarCapitanes(ejeY) {
-		const filaCapitan = [ new Capitan(position=game.at(4,ejeY)), new Capitan(position=game.at(7,ejeY)), new Capitan(position=game.at(10,ejeY)), new Capitan(position=game.at(13,ejeY)), new Capitan(position=game.at(16,ejeY)), new Capitan(position=game.at(19,ejeY)) ]
+		const filaCapitan = [ new Capitan(position=game.at(1,ejeY)), new Capitan(position=game.at(4,ejeY)), new Capitan(position=game.at(7,ejeY)), new Capitan(position=game.at(10,ejeY)), new Capitan(position=game.at(13,ejeY)), new Capitan(position=game.at(16,ejeY)), new Capitan(position=game.at(19,ejeY)) ]
 		filaCapitan.forEach{ soldier =>
 			game.addVisual(soldier)
-			game.onTick(1000, "moverAlternado", { soldier.moverAlternado()})
+			game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
 			const randomInterval = 3000.randomUpTo(6000)
 			game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
 		}
@@ -116,6 +116,9 @@ object vidas {
 	method reiniciarVidas() {
 		vidas = 2
 		image = "image/2vidas.png"
+	}
+	method impactoLaser(){
+		//para que no cause problemas el impacto del laser
 	}
 
 }
