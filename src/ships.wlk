@@ -63,12 +63,13 @@ object mainShip inherits Nave {
 
 	method reiniciar() {
 		self.image("image/Main Ship - Base - Full health.png")
-		impactado = !impactado
+		impactado = false
 	}
 
 }
 
 class EnemyShip inherits Nave {
+
 	var cuenta = 0
 	const limiteCuenta = 11
 	var moverADerecha = true
@@ -78,34 +79,34 @@ class EnemyShip inherits Nave {
 
 	method moverDerecha() {
 		self.position(self.position().right(1))
-		//position = game.at(position.x() + 1, position.y())
+	// position = game.at(position.x() + 1, position.y())
 	}
 
 	method moverIzquierda() {
 		self.position(self.position().left(1))
-		//position = game.at(position.x() - 1, position.y())
+	// position = game.at(position.x() - 1, position.y())
 	}
 
 	method moverAlternado() {
 		if (moverADerecha) self.moverDerecha() else self.moverIzquierda()
 		moverADerecha = !moverADerecha
 	}
-	
+
 	method moverNormal() {
-		if (cuenta!=limiteCuenta and moverADerecha) {
+		if (cuenta != limiteCuenta and moverADerecha) {
 			self.moverDerecha()
-			cuenta+=1
-		} else if(cuenta!=limiteCuenta and !moverADerecha){
+			cuenta += 1
+		} else if (cuenta != limiteCuenta and !moverADerecha) {
 			self.moverIzquierda()
-			cuenta+=1
-		}else{
-			cuenta=0
+			cuenta += 1
+		} else {
+			cuenta = 0
 			moverADerecha = !moverADerecha
 		}
-		//if ((cuenta!=4) and moverADerecha) {self.moverDerecha() cuenta+=1}
-		//else if((cuenta!=4) and !moverADerecha){self.moverIzquierda()cuenta+=1} else
-		//cuenta=0
-		//moverADerecha = !moverADerecha
+	// if ((cuenta!=4) and moverADerecha) {self.moverDerecha() cuenta+=1}
+	// else if((cuenta!=4) and !moverADerecha){self.moverIzquierda()cuenta+=1} else
+	// cuenta=0
+	// moverADerecha = !moverADerecha
 	}
 
 	override method impactoLaser() {
@@ -119,8 +120,9 @@ class EnemyShip inherits Nave {
 			game.addVisual(unLaser)
 			unLaser.moverAbajo()
 		}
-	}}
+	}
 
+}
 
 class Capitan inherits EnemyShip {
 
@@ -131,6 +133,7 @@ class Capitan inherits EnemyShip {
 	method image(nuevaImagen) {
 		image = nuevaImagen
 	}
+
 	override method explotar() {
 		self.image("image/explosion-soldado.png")
 	}
@@ -138,7 +141,6 @@ class Capitan inherits EnemyShip {
 }
 
 class Soldado inherits EnemyShip {
-
 
 	var image = "image/soldier.png"
 
@@ -157,7 +159,6 @@ class Soldado inherits EnemyShip {
 class MotherShip inherits EnemyShip {
 
 	var image = "image/motherShip.png"
-	
 
 	method image() = image
 

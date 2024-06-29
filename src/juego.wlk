@@ -16,7 +16,6 @@ object juego {
 	}
 
 	method pantallaInicial() {
-		game.clear()
 		self.configurar()
 		keyboard.enter().onPressDo{ self.juegoPrincipal()}
 		keyboard.space().onPressDo{ self.pantallaInstrucciones()}
@@ -32,7 +31,6 @@ object juego {
 	method juegoPrincipal() {
 		game.clear()
 		keyboard.space().onPressDo{ mainShip.disparar()}
-		self.configurar()
 		self.iniciar()
 	}
 
@@ -96,7 +94,6 @@ object juego {
 		vidas.reiniciarVidas() // Reiniciar las vidas
 		puntos.reiniciarPuntos() // Reiniciar los puntos
 		mainShip.reiniciar()
-		self.configurar()
 		self.juegoPrincipal() // Iniciar el juego principal
 	}
 
