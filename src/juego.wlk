@@ -1,10 +1,12 @@
 import wollok.game.*
 import ships.*
 import sonidos.*
+import tablero.*
+import vidas.*
 
 object juego {
 
-	const mainShip = new MainShip()
+	//const mainShip = new MainShip()
 
 	method configurar() {
 		game.cellSize(32)
@@ -61,7 +63,7 @@ object juego {
 		game.addVisual(vidas)
 		game.onTick(1000, "moverAlternado", { motherShip.moverAlternado()})
 		keyboard.space().onPressDo{ mainShip.disparar()}
-		game.onTick(1000, "enemyFire" + self.identity().toString(), { motherShip.disparar()})
+		game.onTick(200, "enemyFire" + self.identity().toString(), { motherShip.disparar()})
 	}
 
 	method agregarSoldados(ejeY) {
@@ -95,33 +97,7 @@ object juego {
 
 }
 
-object vidas {
 
-	const position = game.at(1, 18)
-	var property image = "image/2vidas.png"
-	var property vidas = 2
-
-	method image() = image
-
-	method vidas() = vidas
-
-	method position() = position
-
-	method perderVida() {
-		vidas = vidas - 1
-		image = "image/1vidas.png"
-		if (vidas == 0) juego.gameOver()
-	}
-
-	method reiniciarVidas() {
-		vidas = 2
-		image = "image/2vidas.png"
-	}
-	method impactoLaser(){
-		//para que no cause problemas el impacto del laser
-	}
-
-}
 
 object puntos {
 
@@ -138,36 +114,4 @@ object puntos {
 
 }
 
-// estos tableros deberiamos pasarlos a una clase
-class Tablero {
-
-	method position()
-
-	method image()
-
-}
-
-object tableroGameOver inherits Tablero {
-
-	override method position() = game.at(9, 10)
-
-	override method image() = "image/gameOver.png"
-
-}
-
-object tableroYouWin inherits Tablero {
-
-	override method position() = game.at(5, 5)
-
-	override method image() = "image/tableroWin.png"
-
-}
-
-object tableroInstrucciones inherits Tablero {
-
-	override method position() = game.at(0, 0)
-
-	override method image() = "image/instrucciones.jpg"
-
-}
 

@@ -1,7 +1,8 @@
 import wollok.game.*
 import weapons.*
-import example.*
+import juego.*
 import sonidos.*
+import vidas.*
 
 class Nave {
 
@@ -24,7 +25,7 @@ class Nave {
 
 }
 
-class MainShip inherits Nave {
+object mainShip inherits Nave {
 
 	var position = game.at(game.width() / 2, 0)
 	var image = "image/Main Ship - Base - Full health.png"
@@ -118,9 +119,8 @@ class EnemyShip inherits Nave {
 			game.addVisual(unLaser)
 			unLaser.moverAbajo()
 		}
-	}
+	}}
 
-}
 
 class Capitan inherits EnemyShip {
 
@@ -131,7 +131,6 @@ class Capitan inherits EnemyShip {
 	method image(nuevaImagen) {
 		image = nuevaImagen
 	}
-
 	override method explotar() {
 		self.image("image/explosion-soldado.png")
 	}
@@ -139,6 +138,7 @@ class Capitan inherits EnemyShip {
 }
 
 class Soldado inherits EnemyShip {
+
 
 	var image = "image/soldier.png"
 
@@ -157,6 +157,7 @@ class Soldado inherits EnemyShip {
 class MotherShip inherits EnemyShip {
 
 	var image = "image/motherShip.png"
+	
 
 	method image() = image
 
@@ -166,7 +167,8 @@ class MotherShip inherits EnemyShip {
 
 	override method disparar() {
 		if (!impactado) {
-			const unLaser = new Laser(position = game.at(position.x(), position.y() - 1.5))
+			const x = 0.randomUpTo(game.width()).truncate(0)
+			const unLaser = new Laser(position = game.at(x, position.y() - 1.5))
 			sonidoDisparos.play()
 			game.addVisual(unLaser)
 			unLaser.moverAbajo()
@@ -186,33 +188,6 @@ class MotherShip inherits EnemyShip {
 	override method explotar() {
 		self.image("image/explosion-soldado.png")
 		game.removeVisual(self)
-	}
-
-}
-
-object vidasMotherShip {
-
-	const position = game.at(25, 18)
-	var image = "image/barraCompleta.jpeg"
-	var vidasMother = 4
-
-	method image() = image
-
-	method vidasMother() = vidasMother
-
-	method position() = position
-
-	method perderVida() {
-		vidasMother = vidasMother - 1
-		if (vidasMother == 3) {
-			image = "image/barra3-4.jpeg"
-		} else if (vidasMother == 2) {
-			image = "image/barra1-4.jpeg"
-		} else if (vidasMother == 1) {
-			image = "image/barraCasiVacia.jpeg"
-		} else if (vidasMother == 0) {
-			juego.youWin()
-		}
 	}
 
 }

@@ -1,7 +1,8 @@
 import wollok.game.*
-import example.*
+import juego.*
 import ships.*
 import weapons.*
+import vidas.*
 
 object sonidoGameOver{
 	method play(){
