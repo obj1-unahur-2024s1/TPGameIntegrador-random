@@ -12,6 +12,14 @@ class Tablero {
 
 }
 
+object tableroInicio inherits Tablero {
+
+	override method position() = game.at(0, 0)
+
+	override method image() = "image/inicio.png"
+
+}
+
 object tableroGameOver inherits Tablero {
 
 	override method position() = game.at(9, 10)
