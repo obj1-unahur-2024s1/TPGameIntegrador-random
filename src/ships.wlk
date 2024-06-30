@@ -5,7 +5,7 @@ import sonidos.*
 import vidas.*
 
 class Nave {
-
+	var property color
 	var impactado = false
 
 	method disparar()
@@ -22,10 +22,14 @@ class Nave {
 	method desaparecer() {
 		game.schedule(500, { game.removeVisual(self)})
 	}
-
+	method cambiarColor(){
+		if(color=="rojo") color = "verde"
+		else if(color=="verde") color = "azul"
+		else if(color=="azul") color = "rojo"
+	}
 }
 
-object mainShip inherits Nave {
+class MainShip inherits Nave {
 
 	var position = game.at(game.width() / 2, 0)
 	var image = "image/Main Ship - Base - Full health.png"
