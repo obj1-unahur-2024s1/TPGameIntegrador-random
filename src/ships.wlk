@@ -32,9 +32,11 @@ class Nave {
 class MainShip inherits Nave {
 
 	var position = game.at(game.width() / 2, 0)
-	var image = "image/Main Ship - Base - Full health.png"
+	var image = "image/Main_Ship.png"
 
-	method image() = image
+	method image() {
+		return if(color=="rojo")"image/Main_Ship_rojo.png" else if(color=="verde") "image/Main_Ship_verde.png" else if(color=="azul") "image/Main_Ship_azul.png" else image
+	}
 
 	method image(nuevaImagen) {
 		image = nuevaImagen
@@ -48,7 +50,7 @@ class MainShip inherits Nave {
 
 	override method disparar() {
 		if (!impactado) {
-			const unLaser = new Laser(position = game.at(position.x(), position.y() + 1.5))
+			const unLaser = new Laser(color=color, position = game.at(position.x(), position.y() + 1.5))
 			sonidoDisparos.play()
 			game.addVisual(unLaser)
 			unLaser.moverArriba()
@@ -62,6 +64,7 @@ class MainShip inherits Nave {
 	}
 
 	override method explotar() {
+		color = ""
 		self.image("image/explosion-soldado.png")
 	}
 
@@ -120,7 +123,7 @@ class EnemyShip inherits Nave {
 
 	override method disparar() {
 		if (!impactado) {
-			const unLaser = new Laser(position = game.at(position.x(), position.y() - 1))
+			const unLaser = new Laser(color="", position = game.at(position.x(), position.y() - 1))
 			game.addVisual(unLaser)
 			unLaser.moverAbajo()
 		}
@@ -132,13 +135,16 @@ class Capitan inherits EnemyShip {
 
 	var image = "image/captain.png"
 
-	method image() = image
+	method image() {
+		return if(color=="rojo")"image/captain_rojo.png" else if(color=="verde") "image/captain_verde.png" else if(color=="azul") "image/captain_azul.png" else image
+	}
 
 	method image(nuevaImagen) {
 		image = nuevaImagen
 	}
 
 	override method explotar() {
+		color = ""
 		self.image("image/explosion-soldado.png")
 	}
 
@@ -148,13 +154,16 @@ class Soldado inherits EnemyShip {
 
 	var image = "image/soldier.png"
 
-	method image() = image
+	method image() {
+		return if(color=="rojo")"image/soldier_rojo.png" else if(color=="verde") "image/soldier_verde.png" else if(color=="azul") "image/soldier_azul.png" else image
+	}
 
 	method image(nuevaImagen) {
 		image = nuevaImagen
 	}
 
 	override method explotar() {
+		color = ""
 		self.image("image/explosion-soldado.png")
 	}
 
@@ -164,7 +173,9 @@ class MotherShip inherits EnemyShip {
 
 	var image = "image/motherShip.png"
 
-	method image() = image
+	method image() {
+		return if(color=="rojo")"image/motherShip_rojo.png" else if(color=="verde") "image/motherShip_verde.png" else if(color=="azul") "image/motherShip_azul.png" else image
+	}
 
 	method image(nuevaImagen) {
 		image = nuevaImagen
@@ -173,7 +184,7 @@ class MotherShip inherits EnemyShip {
 	override method disparar() {
 		if (!impactado) {
 			const x = 0.randomUpTo(game.width()).truncate(0)
-			const unLaser = new Laser(position = game.at(x, position.y() - 1.5))
+			const unLaser = new Laser(color="", position = game.at(x, position.y() - 1.5))
 			//sonidoDisparos.play() quito sonido laser
 			game.addVisual(unLaser)
 			unLaser.moverAbajo()
@@ -191,6 +202,7 @@ class MotherShip inherits EnemyShip {
 	}
 
 	override method explotar() {
+		color = ""
 		self.image("image/explosion-soldado.png")
 		game.removeVisual(self)
 	}

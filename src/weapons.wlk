@@ -2,19 +2,24 @@ import wollok.game.*
 import ships.*
 
 class Laser {
-
+	
+	var property color
 	var property position
 	const image = "image/laser.png"
 
 	method position() = position
 
-	method image() = image
+	method image() {
+		return if(color=="rojo")"image/laser_rojo.png" else if(color=="verde") "image/laser_verde.png" else if(color=="azul") "image/laser_azul.png" else image
+	}
 
 	method moverArriba() {
 		game.onTick(50, self.identity().toString(), { self.desplazarArriba()})
 		game.onCollideDo(self, { algo =>
-			algo.impactoLaser()
-			self.impactoLaser()
+			if(algo.color()==color){
+				algo.impactoLaser()
+				self.impactoLaser()
+			}
 		})
 	}
 

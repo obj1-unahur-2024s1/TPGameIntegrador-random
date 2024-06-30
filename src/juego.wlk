@@ -6,7 +6,9 @@ import vidas.*
 
 object juego {
 
-	// const mainShip = new MainShip()
+	const mainShip = new MainShip(color="")
+	const mainShipCol = new MainShip(color="rojo")
+	
 	method configurar() {
 		game.cellSize(32)
 		game.height(20)
@@ -36,6 +38,7 @@ object juego {
 	method juegoPrincipal() {
 		game.clear()
 		keyboard.space().onPressDo{ mainShip.disparar()}
+		keyboard.z().onPressDo{ mainShip.cambiarColor()}
 		self.iniciar()
 	}
 
@@ -63,7 +66,7 @@ object juego {
 	}
 
 	method jefeFinal() {
-		const motherShip = new MotherShip(position = game.at(6, 16))
+		const motherShip = new MotherShip(color="", position = game.at(6, 16))
 		game.clear()
 		game.addVisual(motherShip)
 		game.addVisualCharacter(mainShip)
@@ -76,7 +79,7 @@ object juego {
 	}
 
 	method agregarSoldados(ejeY) {
-		const filaSoldados = [ new Soldado(position=game.at(3,ejeY)), new Soldado(position=game.at(6,ejeY)), new Soldado(position=game.at(9,ejeY)), new Soldado(position=game.at(12,ejeY)), new Soldado(position=game.at(15,ejeY)), new Soldado(position=game.at(18,ejeY)) ]
+		const filaSoldados = [ new Soldado(color="rojo", position=game.at(3,ejeY)), new Soldado(color="", position=game.at(6,ejeY)), new Soldado(color="", position=game.at(9,ejeY)), new Soldado(color="", position=game.at(12,ejeY)), new Soldado(color="", position=game.at(15,ejeY)), new Soldado(color="", position=game.at(18,ejeY)) ]
 		filaSoldados.forEach{ soldier =>
 			game.addVisual(soldier)
 			game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
@@ -86,7 +89,7 @@ object juego {
 	}
 
 	method agregarCapitanes(ejeY) {
-		const filaCapitan = [ new Capitan(position=game.at(1,ejeY)), new Capitan(position=game.at(4,ejeY)), new Capitan(position=game.at(7,ejeY)), new Capitan(position=game.at(10,ejeY)), new Capitan(position=game.at(13,ejeY)), new Capitan(position=game.at(16,ejeY)), new Capitan(position=game.at(19,ejeY)) ]
+		const filaCapitan = [ new Capitan(color="", position=game.at(1,ejeY)), new Capitan(color="", position=game.at(4,ejeY)), new Capitan(color="", position=game.at(7,ejeY)), new Capitan(color="", position=game.at(10,ejeY)), new Capitan(color="", position=game.at(13,ejeY)), new Capitan(color="", position=game.at(16,ejeY)), new Capitan(color="", position=game.at(19,ejeY)) ]
 		filaCapitan.forEach{ soldier =>
 			game.addVisual(soldier)
 			game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
