@@ -15,13 +15,17 @@ object juego {
 		game.boardGround("image/spaceBG.jpg")
 	}
 
+	method iniciarJuego() {
+		self.pantallaInicial()
+		game.start()
+	}
+
 	method pantallaInicial() {
 		self.configurar()
 		keyboard.enter().onPressDo{ self.juegoPrincipal()}
 		keyboard.space().onPressDo{ self.pantallaInstrucciones()}
 		game.addVisual(tableroInicio)
 		musicaDeFondo.iniciar()
-		game.start()
 	}
 
 	method pantallaInstrucciones() {
@@ -45,9 +49,9 @@ object juego {
 	method gameOver() {
 		game.clear()
 		game.addVisual(tableroGameOver)
+		keyboard.enter().onPressDo{ self.reiniciarJuego()}
 		musicaDeFondo.sacarMusica()
 		sonidoGameOver.play()
-		keyboard.enter().onPressDo{ self.reiniciarJuego()}
 	}
 
 	method youWin() {
@@ -92,11 +96,12 @@ object juego {
 	}
 
 	method reiniciarJuego() {
-		game.clear()
+		musicaDeFondo.sacarMusica()
 		vidas.reiniciarVidas() // Reiniciar las vidas
 		puntos.reiniciarPuntos() // Reiniciar los puntos
 		mainShip.reiniciar()
-		self.juegoPrincipal() // Iniciar el juego principal
+		game.clear()
+		self.pantallaInicial() // Iniciar el juego principal
 	}
 
 }

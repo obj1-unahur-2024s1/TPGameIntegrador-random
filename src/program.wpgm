@@ -1,5 +1,5 @@
 import juego.*
 
 program main {
-	juego.pantallaInicial()
+	juego.iniciarJuego()
 }
