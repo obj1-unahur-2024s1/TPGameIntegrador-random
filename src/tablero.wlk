@@ -44,3 +44,14 @@ object tableroInstrucciones inherits Tablero {
 
 }
 
+object tableroDificultad {
+
+	const imageNormal = "image/normal.png"
+	const imageDificil = "image/dificil.png"
+
+	method position() = game.at(10, 1)
+
+	method image() = if (juego.modoColores()) imageDificil else imageNormal
+
+}
+
