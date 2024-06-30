@@ -30,6 +30,10 @@ object vidas {
 	method impactoLaser(){
 		//para que no cause problemas el impacto del laser
 	}
+	
+	method color(){
+		//para que no cause error
+	}
 
 }
 
@@ -57,5 +61,7 @@ object vidasMotherShip {
 			juego.youWin()
 		}
 	}
-
+	method color(){
+		//para que no cause error
+	}
 }
