@@ -16,12 +16,12 @@ object juego {
 	}
 
 	method iniciarJuego() {
+		self.configurar()
 		self.pantallaInicial()
 		game.start()
 	}
 
 	method pantallaInicial() {
-		self.configurar()
 		keyboard.enter().onPressDo{ self.juegoPrincipal()}
 		keyboard.space().onPressDo{ self.pantallaInstrucciones()}
 		game.addVisual(tableroInicio)
