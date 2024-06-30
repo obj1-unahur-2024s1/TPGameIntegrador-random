@@ -51,7 +51,11 @@ object musicaDeFondo {
 	}
 
 	method sacarMusica() {
-		musicaFondo.stop()
+		musicaFondo.pause()
+	}
+
+	method reiniciar() {
+		musicaFondo.resume()
 	}
 
 }
