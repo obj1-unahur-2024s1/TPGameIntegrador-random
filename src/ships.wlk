@@ -64,12 +64,13 @@ class MainShip inherits Nave {
 	}
 
 	override method explotar() {
-		color = ""
+		//color = ""
 		self.image("image/explosion-soldado.png")
 	}
 
 	method reiniciar() {
-		self.image("image/Main Ship - Base - Full health.png")
+		//self.image("image/Main_Ship.png")
+		self.image(if(color=="rojo")"image/Main_Ship_rojo.png" else if(color=="verde") "image/Main_Ship_verde.png" else if(color=="azul") "image/Main_Ship_azul.png" else  "image/Main_Ship.png")
 		impactado = false
 	}
 
@@ -118,7 +119,7 @@ class EnemyShip inherits Nave {
 
 	override method impactoLaser() {
 		super()
-		puntos.sumarPunto()
+		juego.sumarPunto()
 	}
 
 	override method disparar() {

@@ -8,9 +8,10 @@ object juego {
 
 	const mainShip = new MainShip(color = "")
 	const mainShipCol = new MainShip(color = "rojo")
-	var modoColores = false
+	var property modoColores = false
+	var property puntos = 0
 
-	method modoColores() = modoColores
+	//method modoColores() = modoColores
 
 	method configurar() {
 		game.cellSize(32)
@@ -151,19 +152,16 @@ object juego {
 		musicaDeFondo.reiniciar()
 		vidas.reiniciarVidas()
 		vidasMotherShip.reiniciarVidas() // Reiniciar las vidas
-		puntos.reiniciarPuntos() // Reiniciar los puntos
+		self.reiniciarPuntos() // Reiniciar los puntos
+		mainShip.reiniciar()
+		mainShipCol.reiniciar()
 		self.pantallaInicial() // Iniciar el juego principal
+		
 	}
-
-}
-
-object puntos {
-
-	var property puntos = 0
-
+	
 	method sumarPunto() {
 		puntos = puntos + 1
-		if (puntos == 12) juego.jefeFinal()
+		if (puntos == 12) self.jefeFinal()
 	}
 
 	method reiniciarPuntos() {
@@ -171,4 +169,21 @@ object puntos {
 	}
 
 }
+
+//object puntos {
+//
+//	var property puntos = 0
+//
+//	method sumarPunto() {
+//		puntos = puntos + 1
+//		if (puntos == 12) juego.jefeFinal()
+//	}
+//
+//	method reiniciarPuntos() {
+//		puntos = 0
+//	}
+//
+//}
+
+
 
