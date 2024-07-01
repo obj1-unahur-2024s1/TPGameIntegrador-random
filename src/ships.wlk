@@ -66,12 +66,12 @@ class MainShip inherits Nave {
 	}
 
 	override method explotar() {
-		//color = ""
+		
 		self.image("image/explosion-soldado.png")
 	}
 
 	method reiniciar() {
-		//self.image("image/Main_Ship.png")
+		
 		self.image(if(color=="rojo")"image/Main_Ship_rojo.png" else if(color=="verde") "image/Main_Ship_verde.png" else if(color=="azul") "image/Main_Ship_azul.png" else  "image/Main_Ship.png")
 		impactado = false
 	}
@@ -89,12 +89,12 @@ class EnemyShip inherits Nave {
 
 	method moverDerecha() {
 		self.position(self.position().right(1))
-	// position = game.at(position.x() + 1, position.y())
+	
 	}
 
 	method moverIzquierda() {
 		self.position(self.position().left(1))
-	// position = game.at(position.x() - 1, position.y())
+	
 	}
 
 	method moverAlternado() {
@@ -113,10 +113,7 @@ class EnemyShip inherits Nave {
 			cuenta = 0
 			moverADerecha = !moverADerecha
 		}
-	// if ((cuenta!=4) and moverADerecha) {self.moverDerecha() cuenta+=1}
-	// else if((cuenta!=4) and !moverADerecha){self.moverIzquierda()cuenta+=1} else
-	// cuenta=0
-	// moverADerecha = !moverADerecha
+
 	}
 
 	override method impactoLaser() {
@@ -188,7 +185,7 @@ class MotherShip inherits EnemyShip {
 		if (!impactado) {
 			const x = 0.randomUpTo(game.width()).truncate(0)
 			const unLaser = new Laser(color="", position = game.at(x, position.y() - 1.5))
-			//sonidoDisparos.play() quito sonido laser
+			
 			game.addVisual(unLaser)
 			unLaser.moverAbajo()
 		}
