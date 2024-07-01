@@ -3,10 +3,10 @@
 ## Equipo de desarrollo
 
 - Cristian Gomez
-- Persona
-- Persona
-- Persona
-- etc.
+- Juan Gioseffi
+- Julian Alvarez
+- Mauricio Arango
+- LoreLiz
 
 ## Capturas
 
