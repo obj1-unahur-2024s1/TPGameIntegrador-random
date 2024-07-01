@@ -6,7 +6,7 @@
 - Juan Gioseffi
 - Julian Alvarez
 - Mauricio Arango
-- LoreLiz
+- Lorena Gajardo
 
 ## Capturas
 
