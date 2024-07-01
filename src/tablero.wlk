@@ -4,8 +4,15 @@ import juego.*
 import ships.*
 import sonidos.*
 
-
-
+class Tablero {
+	var position
+	var image
+	method position() = position
+	method image() = image
+		
+	
+}
+/* 
 object tableroInicio {
 
 	method position() = game.at(0, 0)
@@ -37,6 +44,8 @@ object tableroInstrucciones  {
 	method image() = "image/intrucciones2.jpeg"
 
 }
+* 
+*/
 
 object tableroDificultad {
 

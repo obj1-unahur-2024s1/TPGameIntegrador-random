@@ -10,8 +10,11 @@ object juego {
 	const mainShipCol = new MainShip(color = "rojo")
 	var property modoColores = false
 	var property puntos = 0
-
-	//method modoColores() = modoColores
+	const tableroInicial = new Tablero(position=game.at(0,0), image="image/inicio.png")
+	const tableroGameOver = new Tablero(position=game.at(9, 10), image="image/gameOver.png")
+	const tableroYouWin = new Tablero(position=game.at(5, 5), image="image/tableroWin.png")
+	const tableroInstrucciones = new Tablero(position=game.at(0, 2), image="image/intrucciones2.jpeg")
+	
 
 	method configurar() {
 		game.cellSize(32)
@@ -32,7 +35,7 @@ object juego {
 		keyboard.down().onPressDo{ modoColores = true}
 		keyboard.up().onPressDo{ modoColores = false}
 		keyboard.space().onPressDo{ self.pantallaInstrucciones()}
-		game.addVisual(tableroInicio)
+		game.addVisual(tableroInicial)
 		game.addVisual(tableroDificultad)
 		musicaDeFondo.iniciar()
 	}
