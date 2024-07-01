@@ -61,6 +61,10 @@ object vidasMotherShip {
 			juego.youWin()
 		}
 	}
+	method reiniciarVidas(){
+		vidasMother = 4
+		image = "image/barraCompleta.jpeg"
+	}
 	method color(){
 		//para que no cause error
 	}

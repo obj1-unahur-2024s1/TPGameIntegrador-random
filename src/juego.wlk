@@ -145,12 +145,13 @@ object juego {
 		}
 	}
 
+
 	method reiniciarJuego() {
-		musicaDeFondo.reiniciar()
-		vidas.reiniciarVidas() // Reiniciar las vidas
-		puntos.reiniciarPuntos() // Reiniciar los puntos
-		mainShip.reiniciar()
 		game.clear()
+		musicaDeFondo.reiniciar()
+		vidas.reiniciarVidas()
+		vidasMotherShip.reiniciarVidas() // Reiniciar las vidas
+		puntos.reiniciarPuntos() // Reiniciar los puntos
 		self.pantallaInicial() // Iniciar el juego principal
 	}
 
