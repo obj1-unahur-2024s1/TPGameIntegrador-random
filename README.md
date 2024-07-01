@@ -10,7 +10,7 @@
 
 ## Capturas
 
-(agregar)
+![pantalla principal](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-random/blob/master/image/principalRM.png)
 
 ## Reglas de Juego / Instrucciones
 
