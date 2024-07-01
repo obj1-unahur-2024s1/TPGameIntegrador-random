@@ -38,9 +38,9 @@ object tableroYouWin inherits Tablero {
 
 object tableroInstrucciones inherits Tablero {
 
-	override method position() = game.at(0, 0)
+	override method position() = game.at(0, 2)
 
-	override method image() = "image/instrucciones.jpg"
+	override method image() = "image/intrucciones2.jpeg"
 
 }
 
