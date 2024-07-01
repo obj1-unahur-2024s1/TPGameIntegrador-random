@@ -20,7 +20,9 @@ class Nave {
 	}
 
 	method desaparecer() {
-		game.schedule(500, { game.removeVisual(self)})
+		game.schedule(500, { 
+			if(game.hasVisual(self))game.removeVisual(self)
+		})
 	}
 	method cambiarColor(){
 		if(color=="rojo") color = "verde"
