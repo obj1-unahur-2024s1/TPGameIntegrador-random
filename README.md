@@ -12,6 +12,10 @@
 
 ![pantalla principal](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-random/blob/master/image/principalRM.png)
 
+![juego](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-random/blob/master/image/juegoRM.png)
+
+![jefe](https://github.com/obj1-unahur-2024s1/TPGameIntegrador-random/blob/master/image/jefeRM.png)
+
 ## Reglas de Juego / Instrucciones
 
 OBJETIVO: Derrotar a la flota de naves enemigas y a la nave Madre.
