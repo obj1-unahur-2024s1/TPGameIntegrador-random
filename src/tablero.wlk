@@ -4,43 +4,37 @@ import juego.*
 import ships.*
 import sonidos.*
 
-class Tablero {
 
-	method position()
 
-	method image()
+object tableroInicio {
 
-}
+	method position() = game.at(0, 0)
 
-object tableroInicio inherits Tablero {
-
-	override method position() = game.at(0, 0)
-
-	override method image() = "image/inicio.png"
+	method image() = "image/inicio.png"
 
 }
 
-object tableroGameOver inherits Tablero {
+object tableroGameOver  {
 
-	override method position() = game.at(9, 10)
+	 method position() = game.at(9, 10)
 
-	override method image() = "image/gameOver.png"
-
-}
-
-object tableroYouWin inherits Tablero {
-
-	override method position() = game.at(5, 5)
-
-	override method image() = "image/tableroWin.png"
+	 method image() = "image/gameOver.png"
 
 }
 
-object tableroInstrucciones inherits Tablero {
+object tableroYouWin  {
 
-	override method position() = game.at(0, 2)
+	 method position() = game.at(5, 5)
 
-	override method image() = "image/intrucciones2.jpeg"
+	method image() = "image/tableroWin.png"
+
+}
+
+object tableroInstrucciones  {
+
+	method position() = game.at(0, 2)
+
+	method image() = "image/intrucciones2.jpeg"
 
 }
 
