@@ -173,20 +173,6 @@ object juego {
 
 }
 
-//object puntos {
-//
-//	var property puntos = 0
-//
-//	method sumarPunto() {
-//		puntos = puntos + 1
-//		if (puntos == 12) juego.jefeFinal()
-//	}
-//
-//	method reiniciarPuntos() {
-//		puntos = 0
-//	}
-//
-//}
 
 
 
