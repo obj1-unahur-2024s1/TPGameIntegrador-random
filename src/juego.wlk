@@ -13,7 +13,7 @@ object juego {
 	const tableroInicial = new Tablero(position=game.at(0,0), image="image/inicio.png")
 	const tableroGameOver = new Tablero(position=game.at(9, 10), image="image/gameOver.png")
 	const tableroYouWin = new Tablero(position=game.at(5, 5), image="image/tableroWin.png")
-	const tableroInstrucciones = new Tablero(position=game.at(0, 2), image="image/intrucciones2.jpeg")
+	const tableroInstrucciones = new Tablero(position=game.at(0, 0), image="image/intrucciones2.jpeg")
 	
 
 	method configurar() {
