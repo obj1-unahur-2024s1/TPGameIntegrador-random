@@ -110,6 +110,13 @@ class EnemyShip inherits Nave {
 		}
 
 	}
+	
+	method dispararCadaCiertoTiempo(){
+		const randomInterval = 3000.randomUpTo(6000)
+				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { self.disparar()})
+	}
+	
+	method moverse(){game.onTick(1000, "moverAlternado", { self.moverNormal()})}
 
 	override method impactoLaser() {
 		super()
@@ -176,7 +183,7 @@ class MotherShip inherits EnemyShip {
 			unLaser.moverAbajo()
 		}
 	}
-
+	
 	override method impactoLaser() {
 		if (!impactado) {
 			vidasMotherShip.perderVida()
@@ -188,7 +195,6 @@ class MotherShip inherits EnemyShip {
 	}
 
 	override method explotar() {
-		self.color(explosion)
 		game.removeVisual(self)
 	}
 

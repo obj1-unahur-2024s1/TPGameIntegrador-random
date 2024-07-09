@@ -17,7 +17,7 @@ describe "definiendo naves"{
 	}
 	test "funciona el cambiar de imagen"{
 		vidasMotherShip.perderVida()
-		assert.that(vidasMotherShip.image()=="image/barra3-4.jpeg")
+		assert.that(vidasMotherShip.image()=="image/barra3.jpeg")
 	}
 	test "funciona sumar punto"{
 		juego.sumarPunto()

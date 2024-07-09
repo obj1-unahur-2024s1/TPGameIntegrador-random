@@ -110,7 +110,6 @@ object normal {
 			const mainShip = new MainShip(color = blanco)
 			game.addVisualCharacter(mainShip)
 			mainShip.configurar()
-			//keyboard.space().onPressDo{ mainShip.disparar()}
 		
 	}
 	
@@ -119,7 +118,7 @@ object normal {
 		
 		game.addVisual(motherShip)
 		game.addVisual(vidasMotherShip) // agrega las vidas
-		game.onTick(1000, "moverAlternado", { motherShip.moverAlternado()})
+		motherShip.moverse()
 		game.onTick(200, "enemyFire" + self.identity().toString(), { motherShip.disparar()})
 		
 	}
@@ -128,10 +127,8 @@ object normal {
 		
 		filaSoldados.forEach{ soldier =>
 				game.addVisual(soldier)
-				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
-				const randomInterval = 3000.randomUpTo(6000)
-				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
-		
+				soldier.moverse()
+				soldier.dispararCadaCiertoTiempo()		
 			}
 	
 	}
@@ -140,9 +137,8 @@ object normal {
 	
 			filaCapitan.forEach{ soldier =>
 				game.addVisual(soldier)
-				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
-				const randomInterval = 3000.randomUpTo(6000)
-				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
+				soldier.moverse()
+				soldier.dispararCadaCiertoTiempo()
 			}
 		
 	}
@@ -154,7 +150,6 @@ object dificil {
 			game.addVisualCharacter(mainShip)
 			mainShip.configurar()
 			mainShip.configurarCambio()
-			//keyboard.space().onPressDo{ mainShip.disparar()}
 		
 	}
 	method agregarMotherShip() {
@@ -162,7 +157,7 @@ object dificil {
 		
 			game.addVisual(motherShipCol)
 			game.addVisual(vidasMotherShip) // agrega las vidas
-			game.onTick(1000, "moverAlternado", { motherShipCol.moverAlternado()})
+			motherShipCol.moverse()
 			game.onTick(200, "enemyFire" + self.identity().toString(), { motherShipCol.disparar()})
 			game.onTick(1200, "alternarColores" + self.identity().toString(), { motherShipCol.cambiarColor()})
 	
@@ -173,9 +168,8 @@ object dificil {
 
 			filaSoldadosCol.forEach{ soldier =>
 				game.addVisual(soldier)
-				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
-				const randomInterval = 3000.randomUpTo(6000)
-				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
+				soldier.moverse()
+				soldier.dispararCadaCiertoTiempo()
 			}
 		
 	}
@@ -185,9 +179,9 @@ object dificil {
 	
 			filaCapitanCol.forEach{ soldier =>
 				game.addVisual(soldier)
-				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
-				const randomInterval = 3000.randomUpTo(6000)
-				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
+				soldier.moverse()
+				soldier.dispararCadaCiertoTiempo()
+
 		}
 	
 	}
