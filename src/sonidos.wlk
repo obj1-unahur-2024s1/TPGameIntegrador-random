@@ -44,10 +44,13 @@ object musicaDeFondo {
 
 	const musicaFondo = game.sound("assets/musicafondo.mp3")
 
+	
 	method iniciar() {
+		if (musicaFondo.paused()){musicaFondo.resume()}
+		else{
 		musicaFondo.shouldLoop(true)
 		musicaFondo.volume(0.3)
-		game.schedule(500, { musicaFondo.play()})
+		game.schedule(500, { musicaFondo.play()})}
 	}
 
 	method sacarMusica() {

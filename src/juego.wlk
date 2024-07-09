@@ -24,9 +24,11 @@ object juego {
 	}
 
 	method iniciarJuego() {
+		musicaDeFondo.iniciar()
 		self.configurar()
 		self.pantallaInicial()
 		game.start()
+		
 	}
 
 	method pantallaInicial() {
@@ -36,7 +38,7 @@ object juego {
 		keyboard.space().onPressDo{ self.pantallaInstrucciones()}
 		game.addVisual(tableroInicial)
 		game.addVisual(tableroDificultad)
-		musicaDeFondo.iniciar()
+		
 	}
 
 	method pantallaInstrucciones() {
@@ -53,9 +55,7 @@ object juego {
 	    self.modo().agregarCapitanes(15)
 	    self.modo().agregarSoldados(13)
 	    self.modo().agregarPlayer()
-		//self.agregarCapitanes(15)
-		//self.agregarSoldados(13)
-		//self.agregarPlayer()
+	
 		game.addVisual(vidas)
 	}
 
