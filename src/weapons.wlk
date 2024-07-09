@@ -5,18 +5,17 @@ class Laser {
 	
 	var property color
 	var property position
-	const image = "image/laser.png"
+
 
 	method position() = position
-
-	method image() {
-		return if(color=="rojo")"image/laser_rojo.png" else if(color=="verde") "image/laser_verde.png" else if(color=="azul") "image/laser_azul.png" else image
+	method esDelMismoColor(algo) {
+		return self.color() == algo.color()
 	}
-
+	method image() = "image/laser_"+ self.color().toString() + ".png"
 	method moverArriba() {
 		game.onTick(50, self.identity().toString(), { self.desplazarArriba()})
 		game.onCollideDo(self, { algo =>
-			if(algo.color()==color){
+			if(self.esDelMismoColor(algo)){
 				algo.impactoLaser()
 				self.impactoLaser()
 			}

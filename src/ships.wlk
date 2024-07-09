@@ -5,13 +5,12 @@ import sonidos.*
 import vidas.*
 
 class Nave {
-	var property color
+	var property color 
 	var impactado = false
-
 	method disparar()
-
+	
 	method explotar()
-
+	method impactado() = impactado
 	method impactoLaser() {
 		impactado = true
 		self.explotar()
@@ -25,24 +24,21 @@ class Nave {
 		})
 	}
 	method cambiarColor(){
-		if(color=="rojo") color = "verde"
-		else if(color=="verde") color = "azul"
-		else if(color=="azul") color = "rojo"
+	     self.color(self.color().siguiente())
 	}
 }
 
 class MainShip inherits Nave {
-
-	var position = game.at(game.width() / 2, 0)
-	var image = "image/Main_Ship.png"
-
-	method image() {
-		return if(color=="rojo")"image/Main_Ship_rojo.png" else if(color=="verde") "image/Main_Ship_verde.png" else if(color=="azul") "image/Main_Ship_azul.png" else image
+   var position = game.at(game.width() / 2, 0)
+   method configurar() {
+   	keyboard.space().onPressDo{ self.disparar()}
+   	
+   }
+	method configurarCambio() {
+		keyboard.z().onPressDo{self.cambiarColor()}
 	}
-
-	method image(nuevaImagen) {
-		image = nuevaImagen
-	}
+	
+	method image() = if(self.impactado()) "image/explosion-soldado.png" else "image/Main_Ship_" + self.color().toString() + ".png"
 
 	method position() = position
 
@@ -67,12 +63,11 @@ class MainShip inherits Nave {
 
 	override method explotar() {
 		
-		self.image("image/explosion-soldado.png")
+	
 	}
 
 	method reiniciar() {
 		
-		self.image(if(color=="rojo")"image/Main_Ship_rojo.png" else if(color=="verde") "image/Main_Ship_verde.png" else if(color=="azul") "image/Main_Ship_azul.png" else  "image/Main_Ship.png")
 		impactado = false
 	}
 
@@ -123,7 +118,7 @@ class EnemyShip inherits Nave {
 
 	override method disparar() {
 		if (!impactado) {
-			const unLaser = new Laser(color="", position = game.at(position.x(), position.y() - 1))
+			const unLaser = new Laser(color=blanco, position = game.at(position.x(), position.y() - 1))
 			game.addVisual(unLaser)
 			unLaser.moverAbajo()
 		}
@@ -133,18 +128,15 @@ class EnemyShip inherits Nave {
 
 class Capitan inherits EnemyShip {
 
-	var image = "image/captain.png"
+	var image = "image/captain_" + self.color().toString()+ ".png"
 
-	method image() {
-		return if(color=="rojo")"image/captain_rojo.png" else if(color=="verde") "image/captain_verde.png" else if(color=="azul") "image/captain_azul.png" else image
-	}
+	method image() = image
 
 	method image(nuevaImagen) {
 		image = nuevaImagen
 	}
 
 	override method explotar() {
-		color = ""
 		self.image("image/explosion-soldado.png")
 	}
 
@@ -152,18 +144,16 @@ class Capitan inherits EnemyShip {
 
 class Soldado inherits EnemyShip {
 
-	var image = "image/soldier.png"
+	var image = "image/soldier_" + self.color().toString() + ".png"
 
-	method image() {
-		return if(color=="rojo")"image/soldier_rojo.png" else if(color=="verde") "image/soldier_verde.png" else if(color=="azul") "image/soldier_azul.png" else image
-	}
+	method image() = image
 
 	method image(nuevaImagen) {
 		image = nuevaImagen
 	}
 
 	override method explotar() {
-		color = ""
+		color=blanco
 		self.image("image/explosion-soldado.png")
 	}
 
@@ -171,20 +161,16 @@ class Soldado inherits EnemyShip {
 
 class MotherShip inherits EnemyShip {
 
-	var image = "image/motherShip.png"
+	method image() = if (self.impactado()) "image/explosion-soldado.png" else "image/motherShip_"+ self.color().toString() +".png"
 
-	method image() {
-		return if(color=="rojo")"image/motherShip_rojo.png" else if(color=="verde") "image/motherShip_verde.png" else if(color=="azul") "image/motherShip_azul.png" else image
-	}
+	
 
-	method image(nuevaImagen) {
-		image = nuevaImagen
-	}
+	
 
 	override method disparar() {
 		if (!impactado) {
 			const x = 0.randomUpTo(game.width()).truncate(0)
-			const unLaser = new Laser(color="", position = game.at(x, position.y() - 1.5))
+			const unLaser = new Laser(color=blanco, position = game.at(x, position.y() - 1.5))
 			
 			game.addVisual(unLaser)
 			unLaser.moverAbajo()
@@ -202,10 +188,23 @@ class MotherShip inherits EnemyShip {
 	}
 
 	override method explotar() {
-		color = ""
-		self.image("image/explosion-soldado.png")
+		self.color(explosion)
 		game.removeVisual(self)
 	}
 
+}
+object blanco {
+	
+	method siguiente() = rojo
+}
+object rojo {
+	method siguiente() = verde
+}
+
+object verde {
+	method siguiente() = azul
+}
+object azul {
+	method siguiente() = rojo
 }
 

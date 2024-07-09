@@ -49,12 +49,12 @@ object tableroInstrucciones  {
 
 object tableroDificultad {
 
-	const imageNormal = "image/normal.png"
-	const imageDificil = "image/dificil.png"
+	//const imageNormal = "image/normal.png"
+	//const imageDificil = "image/dificil.png"
 
 	method position() = game.at(10, 1)
 
-	method image() = if (juego.modoColores()) imageDificil else imageNormal
+	method image() = "image/"+ juego.modo().toString()+ ".png"
 
 }
 

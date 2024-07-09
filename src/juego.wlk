@@ -6,9 +6,8 @@ import vidas.*
 
 object juego {
 
-	const mainShip = new MainShip(color = "")
-	const mainShipCol = new MainShip(color = "rojo")
-	var property modoColores = false
+	
+	var property modo = normal
 	var property puntos = 0
 	const tableroInicial = new Tablero(position=game.at(0,0), image="image/inicio.png")
 	const tableroGameOver = new Tablero(position=game.at(9, 10), image="image/gameOver.png")
@@ -32,8 +31,8 @@ object juego {
 
 	method pantallaInicial() {
 		keyboard.enter().onPressDo{ self.juegoPrincipal()}
-		keyboard.down().onPressDo{ modoColores = true}
-		keyboard.up().onPressDo{ modoColores = false}
+		keyboard.down().onPressDo{ modo = dificil}
+		keyboard.up().onPressDo{ modo = normal}
 		keyboard.space().onPressDo{ self.pantallaInstrucciones()}
 		game.addVisual(tableroInicial)
 		game.addVisual(tableroDificultad)
@@ -51,21 +50,13 @@ object juego {
 	}
 
 	method iniciar() {
-		self.agregarCapitanes(15)
-		self.agregarSoldados(13)
-		self.agregarPlayer()
+	    self.modo().agregarCapitanes(15)
+	    self.modo().agregarSoldados(13)
+	    self.modo().agregarPlayer()
+		//self.agregarCapitanes(15)
+		//self.agregarSoldados(13)
+		//self.agregarPlayer()
 		game.addVisual(vidas)
-	}
-
-	method agregarPlayer() {
-		if (modoColores) {
-			game.addVisualCharacter(mainShipCol)
-			keyboard.space().onPressDo{ mainShipCol.disparar()}
-			keyboard.z().onPressDo{ mainShipCol.cambiarColor()}
-		} else {
-			game.addVisualCharacter(mainShip)
-			keyboard.space().onPressDo{ mainShip.disparar()}
-		}
 	}
 
 	method gameOver() {
@@ -86,69 +77,11 @@ object juego {
 
 	method jefeFinal() {
 		game.clear()
-		self.agregarMotherShip()
-		self.agregarPlayer()
+		self.modo().agregarMotherShip()
+		self.modo().agregarPlayer()
 		vidas.reiniciarVidas()
 		game.addVisual(vidas)
 	}
-
-	method agregarMotherShip() {
-		const motherShip = new MotherShip(color = "", position = game.at(6, 16))
-		const motherShipCol = new MotherShip(color = "rojo", position = game.at(6, 16))
-		if (modoColores) {
-			game.addVisual(motherShipCol)
-			game.addVisual(vidasMotherShip) // agrega las vidas
-			game.onTick(1000, "moverAlternado", { motherShipCol.moverAlternado()})
-			game.onTick(200, "enemyFire" + self.identity().toString(), { motherShipCol.disparar()})
-			game.onTick(1200, "alternarColores" + self.identity().toString(), { motherShipCol.cambiarColor()})
-		} else {
-			game.addVisual(motherShip)
-			game.addVisual(vidasMotherShip) // agrega las vidas
-			game.onTick(1000, "moverAlternado", { motherShip.moverAlternado()})
-			game.onTick(200, "enemyFire" + self.identity().toString(), { motherShip.disparar()})
-		}
-	}
-
-	method agregarSoldados(ejeY) {
-		const filaSoldados = [ new Soldado(color="", position=game.at(3,ejeY)), new Soldado(color="", position=game.at(6,ejeY)), new Soldado(color="", position=game.at(9,ejeY)), new Soldado(color="", position=game.at(12,ejeY)), new Soldado(color="", position=game.at(15,ejeY)), new Soldado(color="", position=game.at(18,ejeY)) ]
-		const filaSoldadosCol = [ new Soldado(color="verde", position=game.at(3,ejeY)), new Soldado(color="verde", position=game.at(6,ejeY)), new Soldado(color="verde", position=game.at(9,ejeY)), new Soldado(color="verde", position=game.at(12,ejeY)), new Soldado(color="verde", position=game.at(15,ejeY)), new Soldado(color="verde", position=game.at(18,ejeY)) ]
-		if (modoColores) {
-			filaSoldadosCol.forEach{ soldier =>
-				game.addVisual(soldier)
-				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
-				const randomInterval = 3000.randomUpTo(6000)
-				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
-			}
-		} else {
-			filaSoldados.forEach{ soldier =>
-				game.addVisual(soldier)
-				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
-				const randomInterval = 3000.randomUpTo(6000)
-				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
-			}
-		}
-	}
-
-	method agregarCapitanes(ejeY) {
-		const filaCapitan = [ new Capitan(color="", position=game.at(1,ejeY)), new Capitan(color="", position=game.at(4,ejeY)), new Capitan(color="", position=game.at(7,ejeY)), new Capitan(color="", position=game.at(10,ejeY)), new Capitan(color="", position=game.at(13,ejeY)), new Capitan(color="", position=game.at(16,ejeY)), new Capitan(color="", position=game.at(19,ejeY)) ]
-		const filaCapitanCol = [ new Capitan(color="rojo", position=game.at(1,ejeY)), new Capitan(color="azul", position=game.at(4,ejeY)), new Capitan(color="rojo", position=game.at(7,ejeY)), new Capitan(color="azul", position=game.at(10,ejeY)), new Capitan(color="rojo", position=game.at(13,ejeY)), new Capitan(color="azul", position=game.at(16,ejeY)), new Capitan(color="rojo", position=game.at(19,ejeY)) ]
-		if (modoColores) {
-			filaCapitanCol.forEach{ soldier =>
-				game.addVisual(soldier)
-				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
-				const randomInterval = 3000.randomUpTo(6000)
-				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
-			}
-		} else {
-			filaCapitan.forEach{ soldier =>
-				game.addVisual(soldier)
-				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
-				const randomInterval = 3000.randomUpTo(6000)
-				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
-			}
-		}
-	}
-
 
 	method reiniciarJuego() {
 		game.clear()
@@ -156,8 +89,7 @@ object juego {
 		vidas.reiniciarVidas()
 		vidasMotherShip.reiniciarVidas() // Reiniciar las vidas
 		self.reiniciarPuntos() // Reiniciar los puntos
-		mainShip.reiniciar()
-		mainShipCol.reiniciar()
+	
 		self.pantallaInicial() // Iniciar el juego principal
 		
 	}
@@ -172,7 +104,91 @@ object juego {
 	}
 
 }
+object normal {
 
+	method agregarPlayer() {
+			const mainShip = new MainShip(color = blanco)
+			game.addVisualCharacter(mainShip)
+			mainShip.configurar()
+			//keyboard.space().onPressDo{ mainShip.disparar()}
+		
+	}
+	
+	method agregarMotherShip() {
+		const motherShip = new MotherShip(color = blanco, position = game.at(6, 16))
+		
+		game.addVisual(motherShip)
+		game.addVisual(vidasMotherShip) // agrega las vidas
+		game.onTick(1000, "moverAlternado", { motherShip.moverAlternado()})
+		game.onTick(200, "enemyFire" + self.identity().toString(), { motherShip.disparar()})
+		
+	}
+	method agregarSoldados(ejeY) {
+		const filaSoldados = [ new Soldado(color=blanco, position=game.at(3,ejeY)), new Soldado(color=blanco, position=game.at(6,ejeY)), new Soldado(color=blanco, position=game.at(9,ejeY)), new Soldado(color=blanco, position=game.at(12,ejeY)), new Soldado(color=blanco, position=game.at(15,ejeY)), new Soldado(color=blanco, position=game.at(18,ejeY)) ]
+		
+		filaSoldados.forEach{ soldier =>
+				game.addVisual(soldier)
+				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
+				const randomInterval = 3000.randomUpTo(6000)
+				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
+		
+			}
+	
+	}
+	method agregarCapitanes(ejeY) {
+		const filaCapitan = [ new Capitan(color=blanco, position=game.at(1,ejeY)), new Capitan(color=blanco, position=game.at(4,ejeY)), new Capitan(color=blanco, position=game.at(7,ejeY)), new Capitan(color=blanco, position=game.at(10,ejeY)), new Capitan(color=blanco, position=game.at(13,ejeY)), new Capitan(color=blanco, position=game.at(16,ejeY)), new Capitan(color=blanco, position=game.at(19,ejeY)) ]
+	
+			filaCapitan.forEach{ soldier =>
+				game.addVisual(soldier)
+				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
+				const randomInterval = 3000.randomUpTo(6000)
+				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
+			}
+		
+	}
+}
 
+object dificil {
+	method agregarPlayer() {
+			const mainShip = new MainShip(color = rojo)
+			game.addVisualCharacter(mainShip)
+			mainShip.configurar()
+			mainShip.configurarCambio()
+			//keyboard.space().onPressDo{ mainShip.disparar()}
+		
+	}
+	method agregarMotherShip() {
+		const motherShipCol = new MotherShip(color = rojo, position = game.at(6, 16))
+		
+			game.addVisual(motherShipCol)
+			game.addVisual(vidasMotherShip) // agrega las vidas
+			game.onTick(1000, "moverAlternado", { motherShipCol.moverAlternado()})
+			game.onTick(200, "enemyFire" + self.identity().toString(), { motherShipCol.disparar()})
+			game.onTick(1200, "alternarColores" + self.identity().toString(), { motherShipCol.cambiarColor()})
+	
+	}
 
+	method agregarSoldados(ejeY) {
+		const filaSoldadosCol = [ new Soldado(color=verde, position=game.at(3,ejeY)), new Soldado(color=verde, position=game.at(6,ejeY)), new Soldado(color=verde, position=game.at(9,ejeY)), new Soldado(color=verde, position=game.at(12,ejeY)), new Soldado(color=verde, position=game.at(15,ejeY)), new Soldado(color=verde, position=game.at(18,ejeY)) ]
 
+			filaSoldadosCol.forEach{ soldier =>
+				game.addVisual(soldier)
+				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
+				const randomInterval = 3000.randomUpTo(6000)
+				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
+			}
+		
+	}
+
+	method agregarCapitanes(ejeY) {
+		const filaCapitanCol = [ new Capitan(color=rojo, position=game.at(1,ejeY)), new Capitan(color=azul, position=game.at(4,ejeY)), new Capitan(color=rojo, position=game.at(7,ejeY)), new Capitan(color=azul, position=game.at(10,ejeY)), new Capitan(color=rojo, position=game.at(13,ejeY)), new Capitan(color=azul, position=game.at(16,ejeY)), new Capitan(color=rojo, position=game.at(19,ejeY)) ]
+	
+			filaCapitanCol.forEach{ soldier =>
+				game.addVisual(soldier)
+				game.onTick(1000, "moverAlternado", { soldier.moverNormal()})
+				const randomInterval = 3000.randomUpTo(6000)
+				game.onTick(randomInterval, "enemyFire" + self.identity().toString(), { soldier.disparar()})
+		}
+	
+	}
+}

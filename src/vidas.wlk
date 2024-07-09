@@ -8,10 +8,9 @@ import tablero.*
 object vidas {
 
 	const position = game.at(1, 18)
-	var property image = "image/2vidas.png"
 	var property vidas = 2
 
-	method image() = image
+	method image() = "image/"+self.vidas().toString()+"vidas.png"
 
 	method vidas() = vidas
 
@@ -19,31 +18,26 @@ object vidas {
 
 	method perderVida() {
 		vidas = vidas - 1
-		image = "image/1vidas.png"
-		if (vidas == 0) juego.gameOver()
+		if (vidas == 0) game.schedule(1000, {juego.gameOver()})
 	}
 
 	method reiniciarVidas() {
 		vidas = 2
-		image = "image/2vidas.png"
 	}
 	method impactoLaser(){
 		//para que no cause problemas el impacto del laser
 	}
 	
-	method color(){
-		//para que no cause error
-	}
+	method color() = ""
 
 }
 
 object vidasMotherShip {
 
 	const position = game.at(25, 18)
-	var image = "image/barraCompleta.jpeg"
 	var vidasMother = 4
 
-	method image() = image
+	method image() = "image/barra"+ vidasMother.toString() + ".jpeg"
 
 	method vidasMother() = vidasMother
 
@@ -51,21 +45,16 @@ object vidasMotherShip {
 
 	method perderVida() {
 		vidasMother = vidasMother - 1
-		if (vidasMother == 3) {
-			image = "image/barra3-4.jpeg"
-		} else if (vidasMother == 2) {
-			image = "image/barra1-4.jpeg"
-		} else if (vidasMother == 1) {
-			image = "image/barraCasiVacia.jpeg"
-		} else if (vidasMother == 0) {
+		
+		if (vidasMother == 0) {
 			juego.youWin()
 		}
 	}
 	method reiniciarVidas(){
 		vidasMother = 4
-		image = "image/barraCompleta.jpeg"
+		
 	}
 	method color(){
-		//para que no cause error
+	
 	}
 }
